@@ -181,7 +181,7 @@ def make_calculate_n_kind(number):
 
         :param dice_list: A list of dice to calculate points with.
         :precondition: dice_list should be a list that contains five elements, each of which is a die number in string.
-        :postcondition: Correctly calculate the point player can get in either Three of Fouor of a kind.
+        :postcondition: Correctly calculate the point player can get in either Three of Four of a kind.
         :return: Calculated points
 
         """
@@ -193,46 +193,15 @@ def make_calculate_n_kind(number):
     return calculate_n_of_a_kind
 
 
-def calculate_full_house(dice_set: list) -> int:
-    """Calculate points of Full House.
-
-    A function that calculates the points of Full House when written with dice_set.
-
-    :param dice_set: A set of dice that user wants to use to write Full House.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Full House when written with dice_set.
-    :return: Calculated points of Full House when written with dice_set.
-
-    >>> print(calculate_full_house(["2", "2", "2", "5", "5"]))
-    25
-
-    >>> print(calculate_full_house(["2", "2", "5", "5", "5"]))
-    25
-
-    >>> print(calculate_full_house(["1", "1", "3", "3", "3"]))
-    25
-
-    >>> print(calculate_full_house(["2", "2", "2", "5", "6"]))
-    0
-
-    >>> print(calculate_full_house(["1", "1", "2", "3", "3"]))
-    0
-
-    >>> print(calculate_full_house(["2", "3", "4", "5", "5"]))
-    0
-
-    """
-
-
-def calculate_small_straight(dice_set: list) -> int:
+def calculate_small_straight(dice_lit: list) -> int:
     """Calculate points of Small straight.
 
     A function that calculates the points of Small straight when written with dice_set.
 
-    :param dice_set: A set of dice that user wants to use to write Small straight.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Small straight when written with dice_set.
-    :return: Calculated points of Small straight when written with dice_set.
+    :param dice_lit: A list of dice that user wants to use to write Small straight.
+    :precondition: dice_list should be a list that contains five elements, each of which is a die number in string.
+    :postcondition: Correctly calculate points of Small straight when written with dice_list.
+    :return: Calculated points of Small straight when written with dice_list.
 
     >>> print(calculate_small_straight(["2", "3", "4", "5", "5"]))
     30
@@ -259,17 +228,29 @@ def calculate_small_straight(dice_set: list) -> int:
     0
 
     """
+    count = 0
+    previous_die = -1
+    for die in sorted(dice_lit):
+        die_int = int(die)
+        if die_int == previous_die + 1:
+            count += 1
+        elif die_int != previous_die:
+            count = 0
+        previous_die = die_int
+    if count >= 3:
+        return 30
+    return 0
 
 
-def calculate_large_straight(dice_set: list) -> int:
+def calculate_large_straight(dice_list: list) -> int:
     """Calculate points of Large straight.
 
-    A function that calculates the points of Large straight when written with dice_set.
+    A function that calculates the points of Large straight when written with dice_list.
 
-    :param dice_set: A set of dice that user wants to use to write Large straight.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Large straight when written with dice_set.
-    :return: Calculated points of Large straight when written with dice_set.
+    :param dice_list: A list of dice that user wants to use to write Large straight.
+    :precondition: dice_list should be a list that contains five elements, each of which is a die number in string.
+    :postcondition: Correctly calculate points of Large straight when written with dice_list.
+    :return: Calculated points of Large straight when written with dice_list.
 
     >>> print(calculate_large_straight(["1", "2", "3", "4", "5"]))
     40
@@ -287,6 +268,57 @@ def calculate_large_straight(dice_set: list) -> int:
     0
 
     """
+    count = 0
+    previous_die = -1
+    for die in sorted(dice_list):
+        die_int = int(die)
+        if die_int == previous_die + 1:
+            count += 1
+        elif die_int != previous_die:
+            count = 0
+        previous_die = die_int
+    if count == 4:
+        return 40
+    return 0
+
+
+def calculate_full_house(dice_list):
+    """Calculate points of Full House.
+
+    A function that calculates the points of Full House when written with dice_list.
+
+    :param dice_list: A list of dice that user wants to use to write Full House.
+    :precondition: dice_list should be a list that contains five elements, each of which is a die number in string.
+    :postcondition: Correctly calculate points of Full House when written with dice_list.
+    :return: Calculated points of Full House when written with dice_list.
+
+    >>> print(calculate_full_house(["2", "2", "2", "5", "5"]))
+    25
+
+    >>> print(calculate_full_house(["2", "2", "5", "5", "5"]))
+    25
+
+    >>> print(calculate_full_house(["1", "1", "3", "3", "3"]))
+    25
+
+    >>> print(calculate_full_house(["2", "2", "2", "5", "6"]))
+    0
+
+    >>> print(calculate_full_house(["1", "1", "2", "3", "3"]))
+    0
+
+    >>> print(calculate_full_house(["2", "3", "4", "5", "5"]))
+    0
+
+    """
+    # return zero if there are not two kinds of dice in the dice_set
+    if len(set(dice_list)) != 2:
+        return 0
+    # for dice_set with only two kinds of elements, return 25 if dice_set has two elements of one of the two kinds
+    for die in set(dice_list):
+        if dice_list.count(die) == 2:
+            return 25
+    return 0
 
 
 def sample_score_sheet() -> dict:
