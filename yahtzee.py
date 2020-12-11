@@ -534,6 +534,16 @@ def is_list_inclusive(including_list: list, included_list: list) -> bool:
     >>> print(is_list_inclusive(["1", "2", "2", "4", "5"],["1", "2", "2"]))
     True
     """
+    first = copy.deepcopy(including_list)
+    second = copy.deepcopy(included_list)
+    result = True
+    for element in second:
+        if element in first:
+            first.remove(element)
+        else:
+            result = False
+            break
+    return result
 
 
 def get_difference_list(list_one: list, list_two: list) -> list:
