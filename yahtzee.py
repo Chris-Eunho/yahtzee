@@ -381,14 +381,21 @@ def print_score(score_sheet: dict) -> None:
     """
 
 
-def ask_combo_to_write(dice_set: list, score_sheet: dict) -> str:
+def number_combo_converter(number: str) -> str:
+    number_combo_match = {"1": "Ones", "2": "Twos", "3": "Threes", "4": "Fours", "5": "Fives", "6": "Sixes",
+                          "7": "Three of a kind", "8": "Four of a kind", "9": "Full House", "10": "Small straight",
+                          "11": "Large straight", "12": "Chance", "13": "Yahtzee"}
+    return number_combo_match[number]
+
+
+def ask_combo_to_write(dice_list: list, score_sheet: dict) -> str:
     """Ask which combination to write on the score sheet.
 
     A function that ask user which combination to write and return the user answer.
     It validates player's answer on whether they can write on selected combination or not.
     It keeps asking until the player answers a valid answer.
 
-    :param dice_set: A set of dice to calculate points of a combination with.
+    :param dice_list: A list of dice to calculate points of a combination with.
     :param score_sheet: The score sheet that player wants to write on . It contains player's score information.
     :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
                    The format of score_sheet should be as following
@@ -403,6 +410,30 @@ def ask_combo_to_write(dice_set: list, score_sheet: dict) -> str:
 
      #Can not doctest this function because it will require user's input.
     """
+
+    while True:
+        user_answer = input("Number of combination to write : ").rstrip()
+        # Filter an invalid answer (i.e. not a number from 1 to 13)
+        if user_answer not in [str(number) for number in range(1, 14)]:
+            print("Invalid input. Please choose combination number from 1 to 13")
+            continue
+        chosen_combo = number_combo_converter(user_answer)
+        # When player chose to write yahtzee
+        if chosen_combo == "Yahtzee":
+            if score_sheet[chosen_combo] == " " or score_sheet[chosen_combo] != 0 & len(set(dice_list)) == 1:
+                break
+            elif score_sheet[chosen_combo] == 0:
+                print("You can't write Yahtzee anymore after writing it as 0. Choose other combination")
+                continue
+            else:
+                print(f"{dice_list} is not Yahtzee and Yahtzee is already written. Choose other combination.")
+                continue
+        # When chosen combo is already written on the score sheet
+        if score_sheet[chosen_combo] != " ":
+            print(f"You already wrote {chosen_combo}. Choose another combination.")
+            continue
+        break
+    return chosen_combo
 
 
 def write_yahtzee(dice_list: list, score_sheet: dict) -> None:
