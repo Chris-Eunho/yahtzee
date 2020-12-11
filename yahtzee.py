@@ -128,9 +128,11 @@ def dice_sum(dice_list: list) -> int:
     >>> print(dice_sum(["1", "3", "3", "4", "4"]))
     15
 
-
-
     """
+    result = 0
+    for die in dice_list:
+        result += int(die)
+    return result
 
 
 def calculate_three_kind(dice_set: list) -> int:
