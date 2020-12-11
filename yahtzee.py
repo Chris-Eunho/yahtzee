@@ -577,18 +577,89 @@ def get_difference_list(list_one: list, list_two: list) -> list:
     return result
 
 
-def change_dice_to_keep(given_dice: list) -> list:
-    """Keep dice and from given dice.
+def change_dice_to_keep(dice_dict: dict) -> dict:
+    """Change dice to keep from given dice sets.
 
-    A function that lets player to decide which dice to keep from given set of dice.
+    A function that change which dice to keep from given set of dice.
 
-    :param given_dice: A list of dice number. Player chooses dice to keep from this.
-    :precondition: given_list must contain five elements each of which is a die number in string.
-    :postcondition: Correctly return a list of dice number to keep from given_dice.
-    :return: A list of dice number in string format.
+    :param dice_dict: A dictionary of dice info which contains lists of all dice and dice to keep
+    :precondition: dice_dict is a dictionary of two dice lists.
+                   dice_dict['All'] is a list of five die numbers in string.
+                   dice_dict['Keep'] is a list, all elements of which are elements of dice_dict['All']
+    :postcondition: N/A
+    :return: N/A
 
     #Can not doctest this function because it will require user's input.
     """
+    dice_to_throw = get_difference_list(dice_dict['All'], dice_dict['Keep'])
+    print(f"🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲Change Dice🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲\n"
+          f"\nYou can first choose dice to keep from all dice you have.\n"
+          f"Then you will choose dice to throw from dice you are keeping.\n\n"
+          f"Enter only the numbers of the dice you want to choose.\n"
+          f"e.g.) Enter \"3\" if you want to choose one die of three.\n"
+          f"e.g.2) Enter \"2255\" if you want to choose two dice of two and five each.\n\n"
+          f"All dice you have: {dice_dict['All']}\n"
+          f"Dice you are keeping: {dice_dict['Keep']}\n"
+          f"Dice you are going to throw: {dice_to_throw}\n\n"
+          f"Choose dice to keep from dice you are going to throw.\n"
+          f"Hit Enter key if you don't want to keep anything more.\n")
+    keep_dice(dice_dict)
+    un_keep_dice(dice_dict)
+
+
+def keep_dice(dice_dict: dict) -> None:
+    """Let player keep dice.
+
+    A function that helps user to keep dice from dice that are not kept.
+
+    :param dice_dict: A dictionary of dice info which contains lists of all dice and dice to keep
+    :precondition: dice_dict is a dictionary of two dice lists.
+                   dice_dict['All'] is a list of five die numbers in string.
+                   dice_dict['Keep'] is a list, all elements of which are elements of dice_dict['All']
+    :postcondition: N/A
+    :return: N/A
+
+    #Can not doctest this function because it will require user's input.
+    """
+    dice_to_throw = get_difference_list(dice_dict['All'], dice_dict['Keep'])
+    dice_chosen = []
+    while True:
+        dice_chosen[:] = input("Enter dice to keep: ").strip()
+        if is_list_inclusive(dice_to_throw, dice_chosen):
+            dice_dict['Keep'] += dice_chosen
+            print(f"Now you are going to keep {dice_dict['Keep']}")
+            break
+        else:
+            print(f"Invalid Input. Enter dice from {dice_to_throw} without white spaces.\n"
+                  f"e.g.)If you want to chose [3, 3], then enter \"33\"\n")
+    print(f"Choose dice to throw from dice you are going to keep\n"
+          f"Hit Enter key if you don't want to change anything.\n")
+
+
+def un_keep_dice(dice_dict: dict) -> None:
+    """Let player keep dice.
+
+    A function that helps user to un-keep dice from dice that are kept.
+
+    :param dice_dict: A dictionary of dice info which contains lists of all dice and dice to keep
+    :precondition: dice_dict is a dictionary of two dice lists.
+                   dice_dict['All'] is a list of five die numbers in string.
+                   dice_dict['Keep'] is a list, all elements of which are elements of dice_dict['All']
+    :postcondition: N/A
+    :return: N/A
+
+    #Can not doctest this function because it will require user's input.
+    """
+    dice_chosen = []
+    while True:
+        dice_chosen[:] = input("Enter dice to throw: ").strip()
+        if is_list_inclusive(dice_dict['Keep'], dice_chosen):
+            dice_dict['Keep'] = get_difference_list(dice_dict['Keep'], dice_chosen)
+            print(f"Now you are going to keep {dice_dict['Keep']} and throw {5 - len(dice_dict['Keep'])} new dice")
+            break
+        else:
+            print(f"Invalid Input. Enter dice from {dice_dict['Keep']} without white spaces.\n"
+                  f"e.g.)If you want to chose [3, 3], then enter \"33\"\n")
 
 
 def get_difference_list(list_one: list, list_two: list) -> list:
