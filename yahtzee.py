@@ -574,20 +574,26 @@ def change_dice_to_keep(given_dice: list) -> list:
     """
 
 
-def throw_dice(dice_to_keep: list) -> list:
+def throw_dice(dice_dict: dict) -> None:
     """Throw dice(or a die).
 
-    A function that generates a list that contains five elements each of which is a die number in string.
-    The list includes all elements of dice_to_keep and the rest of the elements are generated randomly.
+    A function that assign new dice list to user's current dice list based on the dice the user keeps
 
-    :param dice_to_keep: A list of dice(die) that user wants to keep.
-    :precondition: A list that contains elements of a number from 1 to 6 in string.
-                   The maximum number of elements is 5.
-    :postcondition: Correctly generate a list of five elements of dice numbers.
-    :return: A list of five dice numbers that includes dice_to_keep.
+    :param dice_dict: A list of dice(die) that user wants to keep.
+    :precondition: A dictionary of two dice lists.
+                   dice_dict['All'] is a list of five die numbers in string.
+                   dice_dict['Keep'] is a list, all elements of which are elements of dice_dict['All']
+    :postcondition: N/A
+    :return: N/A
 
     #Can not doctest this function because it will generate random value(s)
     """
+    result = copy.deepcopy(dice_dict["Keep"])
+    number_of_dice_to_throw = 5 - len(result)
+    for _ in range(number_of_dice_to_throw):
+        result.append(str(random.randint(1, 6)))
+    dice_dict["All"] = result
+    print(f"\ndice are rolling......🎲\n")
 
 
 def ask_action() -> str:
