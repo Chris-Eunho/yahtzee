@@ -406,12 +406,27 @@ def ask_combo_to_write(dice_set: list, score_sheet: dict) -> str:
 
 
 def write_yahtzee(dice_list: list, score_sheet: dict) -> None:
-    """
+    """Write yahtzee on score sheet.
 
-    :param dice_list:
-    :param score_sheet:
-    :return:
+    A function that writes yahtzee on a score sheet based on player's dice combination.
+    It updates the value of "Yahtzee" and "Yahtzee count" according to user's dice list.
+
+    :param dice_list: A numbers of player's current dice to write yahtzee with.
+    :param score_sheet: The score sheet that player wants to write on . It contains player's score information.
+    :precondition : dice_list should contains five elements, each of which is a die number in string.
+                    score_sheet should have a key "Yahtzee" and the value of which can not be 0.
+                    score_sheet should have a key "Yahtzee count" and the value of which should be integer.
+    :return: N/A
+
     """
+    if len(set(dice_list)) == 1:
+        if score_sheet["Yahtzee count"] == " ":
+            score_sheet["Yahtzee"] = 50
+        else:
+            score_sheet["Yahtzee"] += 100
+        score_sheet["Yahtzee count"] += 1
+    else:
+        score_sheet["Yahtzee"] = 0
 
 
 def write_score(dice_list: list, score_sheet: dict) -> None:
@@ -454,7 +469,7 @@ def write_score(dice_list: list, score_sheet: dict) -> None:
         # Call a calculator function corresponding to the combo user chose
         points = combo_points_calculators[combo_to_write](dice_list)
         score_sheet[combo_to_write] = points
-        print(f"\n{score_sheet['name']}, you wrote {points} on {combo_to_write}.\n🎲Score Sheet Updated🎲")
+        print(f"\n{score_sheet['name']}, you wrote {points} on {combo_to_write}.\n\n🎲Score Sheet Updated🎲")
         print_score(score_sheet)
     else:
         # Separate yahtzee case due to the inconsistency in writing score from other combos
