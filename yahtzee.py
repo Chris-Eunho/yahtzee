@@ -1,4 +1,3 @@
-
 def show_result(score_sheets: list) -> None:
     """Show the result of the game.
 
@@ -165,6 +164,7 @@ def calculate_fours(dice_set: list) -> int:
 
     """
 
+
 def calculate_fives(dice_set: list) -> int:
     """Calculate points of Fives.
 
@@ -220,6 +220,7 @@ def dice_sum(dice_set: list) -> int:
 
     """
 
+
 def calculate_sixes(dice_set: list) -> int:
     """Calculate points of Sixes.
 
@@ -248,6 +249,7 @@ def calculate_sixes(dice_set: list) -> int:
     >>> print(calculate_fives(["5", "6", "6", "6", "6"]))
     30
     """
+
 
 def calculate_three_kind(dice_set: list) -> int:
     """Calculate points of Three of a kind.
@@ -423,7 +425,7 @@ def calculate_large_straight(dice_set: list) -> int:
     """
 
 
-def sample_score_sheet()->dict:
+def sample_score_sheet() -> dict:
     """Return a sample score sheet.
 
     This function is created to help doctest.
@@ -432,11 +434,12 @@ def sample_score_sheet()->dict:
     :return: A sample score sheet.
     """
     result = {"name": "player_name", "Ones": 1, "Twos": 4, "Threes": 9, "Fours": 12, "Fives": 20, "Sixes": 18,
-     "Three of a kind": 16, "Four of a kind": 23, "Full House": 25, "Small straight": 30, "Large straight": 40,
-     "Chance": 21, "Yahtzee": 0, "Yahtzee count": 0}
+              "Three of a kind": 16, "Four of a kind": 23, "Full House": 25, "Small straight": 30, "Large straight": 40,
+              "Chance": 21, "Yahtzee": 0, "Yahtzee count": 0}
     return result
 
-def sample_score_sheet_two()->dict:
+
+def sample_score_sheet_two() -> dict:
     """Return a sample score sheet.
 
     This function is created to help doctest.
@@ -445,9 +448,10 @@ def sample_score_sheet_two()->dict:
     :return: A sample score sheet.
     """
     result = {"name": "player_name", "Ones": 1, "Twos": 4, "Threes": 9, "Fours": 12, "Fives": 10, "Sixes": 6,
-     "Three of a kind": 10, "Four of a kind": 23, "Full House": 25, "Small straight": 30, "Large straight": 40,
-     "Chance": 13, "Yahtzee": 50, "Yahtzee count": 0}
+              "Three of a kind": 10, "Four of a kind": 23, "Full House": 25, "Small straight": 30, "Large straight": 40,
+              "Chance": 13, "Yahtzee": 50, "Yahtzee count": 0}
     return result
+
 
 def print_score(score_sheet: dict) -> None:
     """Print score sheet.
@@ -504,7 +508,8 @@ def ask_combo_to_write(dice_set: list, score_sheet: dict) -> str:
      #Can not doctest this function because it will require user's input.
     """
 
-def write_score(dice_set: list, score_sheet: dict ) -> None:
+
+def write_score(dice_set: list, score_sheet: dict) -> None:
     """Write score sheet of Yahtzee.
 
     A function that writes score on Yahtzee score sheet according to calculation of points based on dice_set and
@@ -524,6 +529,7 @@ def write_score(dice_set: list, score_sheet: dict ) -> None:
 
     #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
+
 
 def is_list_inclusive(including_list: list, included_list: list) -> bool:
     """Check if one list includes the other.
@@ -549,6 +555,7 @@ def is_list_inclusive(including_list: list, included_list: list) -> bool:
     True
     """
 
+
 def keep_dice(given_dice: list) -> list:
     """Keep dice and from given dice.
 
@@ -561,6 +568,7 @@ def keep_dice(given_dice: list) -> list:
 
     #Can not doctest this function because it will require user's input.
     """
+
 
 def throw_dice(dice_to_keep: list) -> list:
     """Throw dice(or a die).
@@ -576,6 +584,7 @@ def throw_dice(dice_to_keep: list) -> list:
 
     #Can not doctest this function because it will generate random value(s)
     """
+
 
 def ask_action() -> str:
     """Ask player an action option.
@@ -616,6 +625,7 @@ def play_turn(score_sheet: dict) -> None:
     #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
 
+
 def yahtzee_play(player_name: str, other_player_name: str) -> None:
     """Play one yahtzee game.
 
@@ -631,6 +641,8 @@ def yahtzee_play(player_name: str, other_player_name: str) -> None:
     #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
     pass
+
+
 def yahtzee() -> None:
     """Run yahtzee program.
 
@@ -642,8 +654,21 @@ def yahtzee() -> None:
 
     #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
-    pass
+    print(f"🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲Welcome to Yahtzee🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲\n"
+          f"Player 1 will play first, then player 2 will play second!")
+    play = True
+    while play:
+        yahtzee_play()
+        replay = input("\nType \"Y\" or \"y\" to restart the game.\nHit enter to finish the program.").lower()
+        if replay != "y":
+            play = False
+            print("\n🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲See you again🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲")
+            print("\n🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲Let's Do It Again🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲")
+
+
 def main():
+    yahtzee()
+
 
 if __name__ == '__main__':
     main()
