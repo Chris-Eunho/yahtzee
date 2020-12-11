@@ -19,30 +19,29 @@ def show_result(score_sheets: list) -> None:
 
     #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
-
-
-def calculate_total_score(score_sheet: dict) -> int:
-    """Calculate total score from score sheet.
-
-    A function that calculates total score of given score sheet.
-
-
-    :param score_sheet: A fully written score sheet to calculate total score.
-    :precondition: The format of the dictionary should be as following
-                   {"name": str, "Ones": score, "Twos": score, "Threes": score, "Fours": score,
-                   "Fives": score, "Sixes": score, "Three of a kind": score, "Four of a kind": score,
-                   "Full House": score, "Small straight": score, "Large straight": score, "Chance": score,
-                   "Yahtzee": score, "Yahtzee count": count}
-                   The values named 'score' should be integer.
-    :postcondtion: Correctly returns the calculated total score.
-    :return: The total score from score_sheet
-
-
-    >>> print(calculate_total_score(sample_score_sheet())) #upper section bonus
-    254
-    >>> print(calculate_total_score(sample_score_sheet_two())) #no upper section bonus
-    221
-    """
+    total_scores = [0, 0]
+    for index, score_sheet in enumerate(score_sheets):
+        score_upper_section = score_sheet['Ones'] + score_sheet['Twos'] + score_sheet['Threes'] + \
+                              score_sheet['Fours'] + score_sheet['Fives'] + score_sheet['Sixes']
+        score_lower_section = score_sheet['Three of a kind'] + score_sheet['Four of a kind'] + \
+                              score_sheet['Full House'] + score_sheet['Small straight'] + \
+                              score_sheet['Large straight'] + score_sheet['Chance'] + score_sheet['Yahtzee']
+        bonus = 35 if score_upper_section >= 63 else 0
+        total_scores[index] = score_upper_section + score_lower_section + bonus
+        print(f"\n🎲🎲🎲🎲🎲{score_sheet['name']}'s Result🎲🎲🎲🎲🎲\n"
+              f"\t\tUpper Section : {score_upper_section}\n"
+              f"\t\tBonus         : {bonus}\n"
+              f"\t\tLower Section : {score_lower_section}\n"
+              f"\t\tTotal Score   : {total_scores[index]}\n"
+              f"🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲\n")
+    print(f"🎲🎲\t\t{score_sheets[0]['name']}: {total_scores[0]} vs "
+          f"{score_sheets[1]['name']}: {total_scores[1]}\t\t🎲🎲")
+    if total_scores[0] > total_scores[1]:
+        print(f"🎲🎲{score_sheets[0]['name']}'s Win! Congratulations!🎲🎲\n")
+    elif total_scores[0] < total_scores[1]:
+        print(f"🎲🎲{score_sheets[1]['name']}'s Win! Congratulations!🎲🎲\n")
+    else:
+        print(f"🎲🎲Wow, it's a tie! You should play another game!🎲🎲\n")
 
 
 def make_calculate_ns(number: int):
@@ -83,7 +82,7 @@ def make_calculate_ns(number: int):
     0
 
     >>> print(make_calculate_ns(5)(["5", "5", "5", "4", "5"]))
-    15
+    20
 
     >>> print(make_calculate_ns(6)(["6", "1", "6", "6", "6"]))
     24
@@ -151,8 +150,8 @@ def make_calculate_n_kind(number):
     >>> print(make_calculate_n_kind(3)(["4", "4", "1", "4", "6"]))
     19
 
-    >>> print(print(make_calculate_n_kind(3)(["2", "2", "2", "2", "6"]))
-    16
+    >>> print(make_calculate_n_kind(3)(["2", "2", "2", "2", "6"]))
+    14
 
     >>> print(make_calculate_n_kind(3)(["3", "3", "3", "3", "3"]))
     15
@@ -161,18 +160,18 @@ def make_calculate_n_kind(number):
     0
 
     >>> print(make_calculate_n_kind(4)(["2", "2", "2", "2", "6"]))
-    16
+    14
 
     >>> print(make_calculate_n_kind(4)(["2", "2", "2", "2", "1"]))
-    11
+    9
 
-    >>> print(calculate_four_kind(["5", "5", "5", "5", "1"]))
+    >>> print(make_calculate_n_kind(4)(["5", "5", "5", "5", "1"]))
     21
 
     >>> print(make_calculate_n_kind(4)(["5", "5", "1", "5", "5"])) # non-contiguous case
     21
 
-    >>> print(calculate_four_kind(["5", "5", "5", "5", "5"]))
+    >>> print(make_calculate_n_kind(4)(["5", "5", "5", "5", "5"]))
     25
     """
 
@@ -186,7 +185,7 @@ def make_calculate_n_kind(number):
 
         """
         for die in dice_list:
-            if dice_list.count(die) > number:
+            if dice_list.count(die) > number - 1:
                 return dice_sum(dice_list)
             return 0
 
@@ -365,15 +364,13 @@ def print_score(score_sheet: dict) -> None:
     :postcondition: N/A
     :return: N/A
 
-    >>> print_score(sample_score_sheet())
-    # doctest: +NORMALIZE_WHITESPACE
+    >>> print_score(sample_score_sheet())# doctest: +NORMALIZE_WHITESPACE
     <player_name's Score Sheet>
     [1]Ones: 1	[2]Twos: 4	[3]Threes: 9	[4]Fours: 12	[5]Fives: 20	[6]Sixes: 18
     [7]Three of a kind: 16	[8]Four of a kind: 23	[9]Full House: 25	[10]Small straight: 30
     [11]Large straight: 40	[12]Chance: 21	[13]Yahtzee: 0	**Yahtzee count: 0
 
-    >>> print_score(sample_score_sheet_two())
-    # doctest: +NORMALIZE_WHITESPACE
+    >>> print_score(sample_score_sheet_two())# doctest: +NORMALIZE_WHITESPACE
     <player_name's Score Sheet>
     [1]Ones: 1	[2]Twos: 4	[3]Threes: 9	[4]Fours: 12	[5]Fives: 10	[6]Sixes: 6
     [7]Three of a kind: 10	[8]Four of a kind: 23	[9]Full House: 25	[10]Small straight: 30
@@ -650,19 +647,19 @@ def get_difference_list(list_one: list, list_two: list) -> list:
     :param list_two: A smaller, included list
     :precondition: list_one should include list_two. i.e. All of the elements in list_two are in list_one.
     :postcondition: Correctly return the difference list.
-    :return: The difference list of the two input lists.(list_one - list_two)
+    :return: The difference list of the two input lists.
 
-    >>> print(get_difference_list(['1','2','3','4','5'] - ['1','2','3']))
-    ['4','5']
+    >>> print(get_difference_list(['1','2','3','4','5'], ['1','2','3']))
+    ['4', '5']
 
-    >>> print(get_difference_list(['1','2','3','4','5'] - ['1','2','3','4','5']))
+    >>> print(get_difference_list(['1','2','3','4','5'], ['1','2','3','4','5']))
     []
 
-    >>> print(get_difference_list(['1','2','3','4','5'] - []))
-    ['1','2','3','4','5']
+    >>> print(get_difference_list(['1','2','3','4','5'], []))
+    ['1', '2', '3', '4', '5']
 
-    >>> print(get_difference_list(['1','1','1','3','3'] - ['1','3']))
-    ['1','1','3']
+    >>> print(get_difference_list(['1','1','1','3','3'], ['1','3']))
+    ['1', '1', '3']
 
     """
     result = copy.deepcopy(list_one)
