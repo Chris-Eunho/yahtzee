@@ -46,7 +46,7 @@ def calculate_total_score(score_sheet: dict) -> int:
 
 
 def make_calculate_ns(number: int):
-    """make a fucntion that calculate "n"s in yahtzee game.
+    """Make a fucntion that calculate "N"s in yahtzee game.
 
     A function that generates a points calculator of an upper section combination in yahtzee game.
 
@@ -135,82 +135,62 @@ def dice_sum(dice_list: list) -> int:
     return result
 
 
-def calculate_three_kind(dice_set: list) -> int:
-    """Calculate points of Three of a kind.
+def make_calculate_n_kind(number):
+    """Make a fucntion that calculates points of N of a kind.
 
-    A function that calculates the points of Three of a kind when written with dice_set.
+    A function that generates a points calculator of Three of a kind or Four of a kind in yahtzee game.
 
-    :param dice_set: A set of dice that user wants to use to write Three of a kind.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Three of a kind when written with dice_set.
-    :return: Calculated points of Three of a kind when written with dice_set.
+    :param number: A number that use wants two create function with.
+    :precondition: number shouold be 3 or 4.
+    :postcondition: Correctly generate a function that calculates points of either Three or Four of a kind.
+    :return: A function that calculates points of either Three or Four of a kind
 
-    >>> print(calculate_three_kind(["2", "2", "2", "1", "6"]))
+    >>> print(make_calculate_n_kind(3)(["2", "2", "2", "1", "6"]))
     13
 
-    >>> print(calculate_three_kind(["4", "4", "4", "1", "6"]))
+    >>> print(make_calculate_n_kind(3)(["4", "4", "1", "4", "6"]))
     19
 
-    >>> print(calculate_three_kind(["2", "2", "2", "2", "6"]))
+    >>> print(print(make_calculate_n_kind(3)(["2", "2", "2", "2", "6"]))
     16
 
-    >>> print(calculate_three_kind(["2", "2", "2", "2", "1"]))
-    11
+    >>> print(make_calculate_n_kind(3)(["3", "3", "3", "3", "3"]))
+    15
 
-    >>> print(calculate_three_kind(["5", "5", "5", "5", "1"]))
-    21
-
-    >>> print(calculate_three_kind(["5", "5", "5", "5", "5"]))
-    25
-
-    >>> print(calculate_three_kind(["1", "1", "1", "1", "1"]))
-    5
-
-    >>> print(calculate_three_kind(["2", "2", "3", "1", "1"]))
+    >>> print(make_calculate_n_kind(3)(["1", "2", "3", "4", "5"]))
     0
 
-    >>> print(calculate_three_kind(["1", "2", "3", "4", "5"]))
-    0
-
-    """
-
-
-def calculate_four_kind(dice_set: list) -> int:
-    """Calculate points of Four of a kind.
-
-    A function that calculates the points of Four of a kind when written with dice_set.
-
-    :param dice_set: A set of dice that user wants to use to write Four of a kind.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Four of a kind when written with dice_set.
-    :return: Calculated points of Four of a kind when written with dice_set.
-
-    >>> print(calculate_four_kind(["2", "2", "2", "2", "6"]))
+    >>> print(make_calculate_n_kind(4)(["2", "2", "2", "2", "6"]))
     16
 
-    >>> print(calculate_four_kind(["2", "2", "2", "2", "1"]))
+    >>> print(make_calculate_n_kind(4)(["2", "2", "2", "2", "1"]))
     11
 
     >>> print(calculate_four_kind(["5", "5", "5", "5", "1"]))
     21
 
-    >>> print(calculate_four_kind(["5", "5", "1", "5", "5"])) # non-contiguous case
+    >>> print(make_calculate_n_kind(4)(["5", "5", "1", "5", "5"])) # non-contiguous case
     21
 
     >>> print(calculate_four_kind(["5", "5", "5", "5", "5"]))
     25
-
-    >>> print(calculate_four_kind(["1", "1", "1", "1", "1"]))
-    5
-
-    >>> print(calculate_four_kind(["5", "5", "5", "2", "1"]))
-    0
-
-    >>> print(calculate_four_kind(["5", "5", "5", "1", "1"]))
-    0
-
-
     """
+
+    def calculate_n_of_a_kind(dice_list):
+        """Calculate points of ns of given dice list.
+
+        :param dice_list: A list of dice to calculate points with.
+        :precondition: dice_list should be a list that contains five elements, each of which is a die number in string.
+        :postcondition: Correctly calculate the point player can get in either Three of Fouor of a kind.
+        :return: Calculated points
+
+        """
+        for die in dice_list:
+            if dice_list.count(die) > number:
+                return dice_sum(dice_list)
+            return 0
+
+    return calculate_n_of_a_kind
 
 
 def calculate_full_house(dice_set: list) -> int:
