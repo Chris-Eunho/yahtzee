@@ -417,7 +417,7 @@ def calculate_large_straight(dice_set: list) -> int:
     >>> print(calculate_large_straight(["1", "3", "4", "5", "5"]))
     0
 
-    >>> print(calculate_large_straight(["1", "1", "1", "1", "1"]))
+    >>> print(calculate_large_straight(["2", "2", "2", "2", "2"]))
     0
 
     """
