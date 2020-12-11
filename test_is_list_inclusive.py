@@ -24,7 +24,7 @@ class TestIsListInclusive(TestCase):
         self.assertEqual(expected, actual)
 
     def test_is_list_inclusive_wrong_element(self):
-        expected = True
+        expected = False
         actual = is_list_inclusive(["1", "2", "3", "4", "5"], ["1", "2", "6"])
         self.assertEqual(expected, actual)
 

@@ -575,7 +575,7 @@ def change_dice_to_keep(dice_dict: dict) -> dict:
     :postcondition: N/A
     :return: N/A
 
-    #Can not doctest this function because it will require user's input.
+    #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
     dice_to_throw = get_difference_list(dice_dict['All'], dice_dict['Keep'])
     print(f"🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲Change Dice🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲\n"
