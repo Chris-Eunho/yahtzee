@@ -379,6 +379,13 @@ def print_score(score_sheet: dict) -> None:
     [7]Three of a kind: 10	[8]Four of a kind: 23	[9]Full House: 25	[10]Small straight: 30
     [11]Large straight: 40	[12]Chance: 13	[13]Yahtzee: 50	**Yahtzee count: 0
     """
+    print(f"<{score_sheet['name']}'s Score Sheet>\n"
+          f"[1]Ones: {score_sheet['Ones']}\t[2]Twos: {score_sheet['Twos']}\t[3]Threes: {score_sheet['Threes']}\t"
+          f"[4]Fours: {score_sheet['Fours']}\t[5]Fives: {score_sheet['Fives']}\t[6]Sixes: {score_sheet['Sixes']}\n"
+          f"[7]Three of a kind: {score_sheet['Three of a kind']}\t[8]Four of a kind: {score_sheet['Four of a kind']}\t"
+          f"[9]Full House: {score_sheet['Full House']}\t[10]Small straight: {score_sheet['Small straight']}\n"
+          f"[11]Large straight: {score_sheet['Large straight']}\t[12]Chance: {score_sheet['Chance']}\t"
+          f"[13]Yahtzee: {score_sheet['Yahtzee']}\t**Yahtzee count: {score_sheet['Yahtzee count']}")
 
 
 def number_combo_converter(number: str) -> str:
