@@ -1,3 +1,7 @@
+import random
+import copy
+
+
 def show_result(score_sheets: list) -> None:
     """Show the result of the game.
 
@@ -601,6 +605,24 @@ def ask_action() -> str:
     """
 
 
+def get_first_dice_throw() -> dict:
+    """Get a result of first dice throw
+
+    A function that generates dictionary of two dice lists.
+    The value of the key 'All' is a list of five randomly generated die numbers in string.
+    The value of the key 'Keep' is an empty list.
+
+    :precondition: N/A
+    :postcondition: Correctly generate a dictionary of the two dice lists.
+    :return: A dictionary of two dice lists for first dice throw.
+
+    #Can not doctest this function because it uses random method.
+    """
+    dice_dict = {'All': [str(random.randint(1, 6)) for _ in range(5)], 'Keep': []}  # Result of first roll
+    print(f"\nYour first dice are thrown.....🎲")
+    return dice_dict
+
+
 def play_turn(score_sheet: dict) -> None:
     """Play a turn of yahtzee.
 
@@ -624,6 +646,11 @@ def play_turn(score_sheet: dict) -> None:
 
     #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
+
+    print(f"\n{score_sheet['name']}, it's your turn.")
+    print_score(score_sheet)
+    dice = get_first_dice_throw()
+    throw_chance = 2  # Number of possible throws left
 
 
 def play_additional_turns(score_sheets: dict) -> None:
@@ -670,23 +697,16 @@ def play_additional_turns(score_sheets: dict) -> None:
             play_turn(score_sheets[1])
 
 
-def get_empty_score_sheets() -> list:
-    """Return empty score sheets for yahtzee.
+def empty_score_sheets() -> list:
+    """Return a list of two empty score sheets for yahtzee game."""
 
-    A function that creates a list containing two players' empty score sheets in dictionary format.
-
-    :precondition: N/A
-    :postcondition: Correctly return the list of two default empty score sheets
-    :return: Empty score sheets for two players
-    """
-    score_sheets = [{"name": "Player 1", "Ones": ' ', "Twos": ' ', "Threes": ' ', "Fours": ' ', "Fives": ' ',
-                     "Sixes": ' ', "Three of a kind": ' ', "Four of a kind": ' ', "Full House": ' ',
-                     "Small straight": ' ', "Large straight": ' ', "Chance": ' ', "Yahtzee": ' ', "Yahtzee count": 0},
-                    {"name": "Player 2", "Ones": ' ', "Twos": ' ', "Threes": ' ', "Fours": ' ', "Fives": ' ',
-                     "Sixes": ' ', "Three of a kind": ' ', "Four of a kind": ' ', "Full House": ' ',
-                     "Small straight": ' ', "Large straight": ' ', "Chance": ' ', "Yahtzee": 0,
-                     "Yahtzee count": 0}]
-    return score_sheets
+    return [{"name": "Player 1", "Ones": ' ', "Twos": ' ', "Threes": ' ', "Fours": ' ', "Fives": ' ',
+             "Sixes": ' ', "Three of a kind": ' ', "Four of a kind": ' ', "Full House": ' ',
+             "Small straight": ' ', "Large straight": ' ', "Chance": ' ', "Yahtzee": ' ', "Yahtzee count": 0},
+            {"name": "Player 2", "Ones": ' ', "Twos": ' ', "Threes": ' ', "Fours": ' ', "Fives": ' ',
+             "Sixes": ' ', "Three of a kind": ' ', "Four of a kind": ' ', "Full House": ' ',
+             "Small straight": ' ', "Large straight": ' ', "Chance": ' ', "Yahtzee": 0,
+             "Yahtzee count": 0}]
 
 
 def yahtzee_play() -> None:
@@ -701,7 +721,7 @@ def yahtzee_play() -> None:
 
     #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
-    score_sheets = get_empty_score_sheets()
+    score_sheets = empty_score_sheets()
 
     for _ in range(13):  # Play fixed 13 alternative rounds
         for score_sheet in score_sheets:
