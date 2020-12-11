@@ -560,7 +560,7 @@ def is_list_inclusive(including_list: list, included_list: list) -> bool:
     """
 
 
-def keep_dice(given_dice: list) -> list:
+def change_dice_to_keep(given_dice: list) -> list:
     """Keep dice and from given dice.
 
     A function that lets player to decide which dice to keep from given set of dice.
@@ -651,6 +651,22 @@ def play_turn(score_sheet: dict) -> None:
     print_score(score_sheet)
     dice = get_first_dice_throw()
     throw_chance = 2  # Number of possible throws left
+    player_action = ""  # Initialize player_action for looping
+    while player_action != "1":
+        print(f"\nYour current dice are : {dice['All']} and you are keeping {dice['Keep']}.\n"
+              f"You have {throw_chance} more chance(s) to throw dice.\n")
+        if throw_chance == 0:
+            print("You used all of your chances to throw dice. Mark the score sheet with current dice.")
+            write_score(dice['All'], score_sheet)
+            break
+        player_action = ask_action()
+        if player_action == "1":
+            write_score(dice['All'], score_sheet)
+        elif player_action == "2":
+            change_dice_to_keep(dice)
+        else:
+            throw_dice(dice)
+            throw_chance -= 1
 
 
 def play_additional_turns(score_sheets: dict) -> None:
