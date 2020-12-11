@@ -638,7 +638,7 @@ def un_keep_dice(dice_dict: dict) -> None:
     """
     dice_chosen = []
     while True:
-        dice_chosen[:] = input("Enter dice to throw: ").strip()
+        dice_chosen[:] = input("Enter dice to un-keep(to throw): ").strip()
         if is_list_inclusive(dice_dict['Keep'], dice_chosen):
             dice_dict['Keep'] = get_difference_list(dice_dict['Keep'], dice_chosen)
             print(f"Now you are going to keep {dice_dict['Keep']} and throw {5 - len(dice_dict['Keep'])} new dice")
