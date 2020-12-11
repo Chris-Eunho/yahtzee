@@ -45,169 +45,77 @@ def calculate_total_score(score_sheet: dict) -> int:
     """
 
 
-def calculate_ones(dice_set: list) -> int:
-    """Calculate points of Ones.
+def make_calculate_ns(number: int):
+    """make a fucntion that calculate "n"s in yahtzee game.
 
-    A function that calculates the points of Ones when written with dice_set.
+    A function that generates a points calculator of an upper section combination in yahtzee game.
 
-    :param dice_set: A set of dice that user wants to use to write Ones.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Ones when written with dice_set.
-    :return: Calculated points of Ones when written with dice_set.
+    :param number: A number that use wants two create function with(e.g. if number == 1, it makes a calculator for Ones)
+    :precondition: number shouold be a die number (i.e. 1 to 6)
+    :postcondition: Correctly generate a function that calculates one of the functions in the upper section
+    :return: A function that calculates one of the functions in the upper section
 
-    >>> print(calculate_ones(["5", "2", "3", "4", "6"]))
+    >>> print(make_calculate_ns(1)(["5", "2", "3", "4", "6"]))
     0
 
-    >>> print(calculate_ones(["1", "2", "3", "4", "5"]))
+    >>> print(make_calculate_ns(1)(["1", "2", "3", "4", "5"]))
     1
 
-    >>> print(calculate_ones(["1", "1", "3", "5", "5"]))
-    2
-
-    >>> print(calculate_ones(["1", "1", "1", "5", "5"]))
-    3
-
-    >>> print(calculate_ones(["1", "1", "1", "1", "1"]))
-    4
-
-    >>> print(calculate_ones(["1", "1", "1", "1", "1"]))
+    >>> print(make_calculate_ns(1)(["1", "1", "1", "1", "1"]))
     5
 
-    """
-
-
-def calculate_twos(dice_set: list) -> int:
-    """Calculate points of Twos.
-
-    A function that calculates the points of Twos when written with dice_set.
-
-    :param dice_set: A set of dice that user wants to use to write Twos.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Twos when written with dice_set.
-    :return: Calculated points of Twos when written with dice_set.
-
-    >>> print(calculate_twos(["1", "5", "3", "4", "6"]))
-    0
-
-    >>> print(calculate_twos(["1", "2", "3", "4", "5"]))
-    2
-
-    >>> print(calculate_twos(["2", "2", "3", "5", "5"]))
+    >>> print(make_calculate_ns(2)(["2", "2", "3", "5", "5"]))
     4
 
-    >>> print(calculate_twos(["2", "2", "2", "5", "5"]))
-    6
-
-    >>> print(calculate_twos(["1", "2", "2", "2", "2"]))
+    >>> print(make_calculate_ns(2)([ "2", "2", "1", "2", "2"]))
     8
 
-    >>> print(calculate_twos(["2", "2", "2", "2", "2"]))
-    10
-
-    """
-
-
-def calculate_threes(dice_set: list) -> int:
-    """Calculate points of Threes.
-
-    A function that calculates the points of Threes when written with dice_set.
-
-    :param dice_set: A set of dice that user wants to use to write Threes.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Threes when written with dice_set.
-    :return: Calculated points of Threes when written with dice_set.
-
-    >>> print(calculate_threes(["1", "2", "5", "4", "6"]))
+    >>> print(make_calculate_ns(3)(["1", "2", "5", "4", "6"]))
     0
 
-    >>> print(calculate_threes(["1", "2", "3", "4", "5"]))
-    3
-
-    >>> print(calculate_threes(["1", "3", "3", "5", "5"]))
-    6
-
-    >>> print(calculate_threes(["1", "2", "3", "3", "3"]))
+    >>> print(make_calculate_ns(3)([ "3", "1", "2", "3", "3"]))
     9
 
-    >>> print(calculate_threes(["1", "3", "3", "3", "3"]))
-    12
-
-    >>> print(calculate_threes(["3", "3", "3", "3", "3"]))
-    15
-
-    """
-
-
-def calculate_fours(dice_set: list) -> int:
-    """Calculate points of Fours.
-
-    A function that calculates the points of Fours when written with dice_set.
-
-    :param dice_set: A set of dice that user wants to use to write Fours.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Fours when written with dice_set.
-    :return: Calculated points of Fours when written with dice_set.
-
-    >>> print(calculate_fives(["1", "2", "3", "5", "6"]))
-    0
-
-    >>> print(calculate_fives(["1", "2", "3", "4", "5"]))
-    4
-
-    >>> print(calculate_fives(["1", "2", "3", "4", "4"]))
+    >>> print(make_calculate_ns(4)(["4", "2", "3", "4", "5"]))
     8
 
-    >>> print(calculate_fives(["1", "2", "4", "4", "4"]))
-    12
-
-    >>> print(calculate_fives(["1", "4", "4", "4", "4"]))
-    16
-
-    >>> print(calculate_fives(["4", "4", "4", "4", "4"]))
-    20
-
-    """
-
-
-def calculate_fives(dice_set: list) -> int:
-    """Calculate points of Fives.
-
-    A function that calculates the points of Fives when written with dice_set.
-
-    :param dice_set: A set of dice that user wants to use to write Fives.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Fives when written with dice_set.
-    :return: Calculated points of Fives when written with dice_set.
-
-    >>> print(calculate_fives(["1", "2", "3", "4", "6"]))
+    >>> print(make_calculate_ns(5)(["1", "2", "3", "4", "2"]))
     0
 
-    >>> print(calculate_fives(["1", "2", "3", "4", "5"]))
-    5
-
-    >>> print(calculate_fives(["1", "2", "3", "5", "5"]))
-    10
-
-    >>> print(calculate_fives(["1", "2", "5", "5", "5"]))
+    >>> print(make_calculate_ns(5)(["5", "5", "5", "4", "5"]))
     15
 
-    >>> print(calculate_fives(["1", "5", "5", "5", "5"]))
-    15
+    >>> print(make_calculate_ns(6)(["6", "1", "6", "6", "6"]))
+    24
 
-    >>> print(calculate_fives(["5", "5", "5", "5", "5"]))
-    25
-
-
+    >>> print(make_calculate_ns(6)(["6", "6", "6", "6", "6"]))
+    30
     """
 
+    def calculate_ns(dice_list: list) -> int:
+        """Calculate points of ns of given dice list.
 
-def dice_sum(dice_set: list) -> int:
+        :param dice_list: A list of dice to calculate.
+        :precondition: dice_list should be a list that contains five elements, each of which is a die number in string.
+        :postcondition: Correctly calculate the point player can get in one of upper section combination with dice_list.
+        :return: Calculated points
+        """
+        count = 0
+        for die in dice_list:
+            if die == str(number):
+                count += 1
+        return count * number
+
+    return calculate_ns
+
+
+def dice_sum(dice_list: list) -> int:
     """Calculate the sum of dice.
 
     A function that calculates the sum of a dice set in a list format.
 
-    :param dice_set: A set of dice to calculate sum of.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
+    :param dice_list: A list of dice to calculate sum of.
+    :precondition: dice_list should be a list that contains five elements, each of which is a die number in string.
     :postcondition: Correctly calculate sum of elements of dice_set.
     :return: sum of elements of dice_set
 
@@ -222,36 +130,6 @@ def dice_sum(dice_set: list) -> int:
 
 
 
-    """
-
-
-def calculate_sixes(dice_set: list) -> int:
-    """Calculate points of Sixes.
-
-    A function that calculates the points of Sixes when written with dice_set.
-
-    :param dice_set: A set of dice that user wants to use to write Sixes.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
-    :postcondition: Correctly calculate points of Sixes when written with dice_set.
-    :return: Calculated points of Sixes when written with dice_set.
-
-    >>> print(calculate_fives(["1", "2", "3", "4", "5"]))
-    0
-
-    >>> print(calculate_fives(["1", "2", "3", "4", "6"]))
-    6
-
-    >>> print(calculate_fives(["1", "2", "3", "6", "6"]))
-    12
-
-    >>> print(calculate_fives(["1", "2", "6", "6", "6"]))
-    18
-
-    >>> print(calculate_fives(["1", "6", "6", "6", "6"]))
-    24
-
-    >>> print(calculate_fives(["5", "6", "6", "6", "6"]))
-    30
     """
 
 
