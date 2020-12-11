@@ -721,12 +721,24 @@ def ask_action() -> str:
     If player enter input other than 1, 2 or 3, it shows an error message and
     keeps asking until user enters valid input.
 
-    :precondition: n/a
+    :precondition: N/A
     :postcondition: Correctly return user's input after validation check.
     :return: User's option choice from 1 to 3 in string.
 
     #Can not doctest this function because it will require user's input.
     """
+
+    result = " "
+    while result not in ["1", "2", "3"]:
+        print(f"What do you want to do next?\n"
+              f"Enter a number from 1 to 3 according to options below.\n"
+              f"[1] : Write score sheet with your current dice.\n"
+              f"[2] : Change dice to keep.\n"
+              f"[3] : Throw dice.\n")
+        result = input("Your choice : ")
+        if result not in ["1", "2", "3"]:
+            print("\nPlease enter your option from 1 to 3.\n")
+    return result
 
 
 def get_first_dice_throw() -> dict:
