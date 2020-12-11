@@ -405,14 +405,24 @@ def ask_combo_to_write(dice_set: list, score_sheet: dict) -> str:
     """
 
 
-def write_score(dice_set: list, score_sheet: dict) -> None:
+def write_yahtzee(dice_list: list, score_sheet: dict) -> None:
+    """
+
+    :param dice_list:
+    :param score_sheet:
+    :return:
+    """
+
+
+def write_score(dice_list: list, score_sheet: dict) -> None:
     """Write score sheet of Yahtzee.
 
     A function that writes score on Yahtzee score sheet according to calculation of points based on dice_set and
     user's input. One cannot overwrite score sheet unless it's multiple yahtzee case.
-    :param dice_set: A set of dice to calculate points of a combination with.
+
+    :param dice_list: A list of dice to calculate points of a combination with.
     :param score_sheet: The score sheet that player wants to write on . It contains player's score information.
-    :precondition: dice_set should be a list that contains five elements, each of which is a die number in string.
+    :precondition: dice_list should contains five elements, each of which is a die number in string.
                    The format of score_sheet should be as following
                    {"name": str, "Ones": score, "Twos": score, "Threes": score, "Fours": score,
                    "Fives": score, "Sixes": score, "Three of a kind": score, "Four of a kind": score,
@@ -425,6 +435,30 @@ def write_score(dice_set: list, score_sheet: dict) -> None:
 
     #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
+    print_score(score_sheet)
+    print(f"Your dice are\n{dice_list}")
+    print(f"Entre the number of combination to mark from the score sheet.\ne.g) Enter '1' to mark Ones\n")
+
+    # Make 12 key-value pairs of combinations and the corresponding calculators  (except for Yahtzee)
+    combo_points_calculators = {"Ones": make_calculate_ns(1), "Twos": make_calculate_ns(2),
+                                'Threes': make_calculate_ns(3), "Fours": make_calculate_ns(4),
+                                "Fives": make_calculate_ns(5), "Sixes": make_calculate_ns(6),
+                                "Three of a kind": make_calculate_n_kind(3),
+                                "Four of a kind": make_calculate_n_kind(4), "Full House": calculate_full_house,
+                                "Small straight": calculate_small_straight, "Large straight": calculate_large_straight,
+                                "Chance": dice_sum}
+    # Ask user which combo to write
+    combo_to_write = ask_combo_to_write(dice_list, score_sheet)
+
+    if combo_to_write != "Yahtzee":
+        # Call a calculator function corresponding to the combo user chose
+        points = combo_points_calculators[combo_to_write](dice_list)
+        score_sheet[combo_to_write] = points
+        print(f"\n{score_sheet['name']}, you wrote {points} on {combo_to_write}.\n🎲Score Sheet Updated🎲")
+        print_score(score_sheet)
+    else:
+        # Separate yahtzee case due to the inconsistency in writing score from other combos
+        write_yahtzee(dice_list, score_sheet)
 
 
 def is_list_inclusive(including_list: list, included_list: list) -> bool:
