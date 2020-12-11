@@ -308,6 +308,9 @@ def calculate_four_kind(dice_set: list) -> int:
     >>> print(calculate_four_kind(["5", "5", "5", "5", "1"]))
     21
 
+    >>> print(calculate_four_kind(["5", "5", "1", "5", "5"])) # non-contiguous case
+    21
+
     >>> print(calculate_four_kind(["5", "5", "5", "5", "5"]))
     25
 
@@ -551,7 +554,6 @@ def keep_dice(given_dice: list) -> list:
 
     A function that lets player to decide which dice to keep from given set of dice.
 
-    :rtype: object
     :param given_dice: A list of dice number. Player chooses dice to keep from this.
     :precondition: given_list must contain five elements each of which is a die number in string.
     :postcondition: Correctly return a list of dice number to keep from given_dice.
@@ -630,9 +632,9 @@ def yahtzee_play(player_name: str, other_player_name: str) -> None:
     """
     pass
 def yahtzee() -> None:
-    """Start yahtzee program.
+    """Run yahtzee program.
 
-    A function that keeps play yahtzee until player wants to quit.
+    A function that keeps playing yahtzee games until player wants to quit.
 
     :precondition: N/A
     :postcondition : Runs the program correctly
