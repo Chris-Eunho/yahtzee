@@ -703,10 +703,13 @@ def yahtzee_play() -> None:
     """
     score_sheets = get_empty_score_sheets()
 
-    for _ in range(13):
+    for _ in range(13):  # Play fixed 13 alternative rounds
         for score_sheet in score_sheets:
             play_turn(score_sheet)
-    play_additional_turns(score_sheets)
+    play_additional_turns(score_sheets)  # Play additional turns for as many yahtzees as each player has
+
+    print(f"🎲🎲🎲🎲🎲🎲Game Finished!🎲🎲🎲🎲🎲🎲")
+    show_result(score_sheets)
 
 
 def yahtzee() -> None:
