@@ -626,21 +626,38 @@ def play_turn(score_sheet: dict) -> None:
     """
 
 
-def yahtzee_play(player_name: str, other_player_name: str) -> None:
+def get_empty_score_sheets() -> list:
+    """Return empty score sheets for yahtzee.
+
+    A function that creates a list containing two players' empty score sheets in dictionary format.
+
+    :precondition: N/A
+    :postcondition: Correctly return the list of two default empty score sheets
+    :return: Empty score sheets for two players
+    """
+    score_sheets = [{"name": "Player 1", "Ones": ' ', "Twos": ' ', "Threes": ' ', "Fours": ' ', "Fives": ' ',
+                     "Sixes": ' ', "Three of a kind": ' ', "Four of a kind": ' ', "Full House": ' ',
+                     "Small straight": ' ', "Large straight": ' ', "Chance": ' ', "Yahtzee": ' ', "Yahtzee count": 0},
+                    {"name": "Player 2", "Ones": ' ', "Twos": ' ', "Threes": ' ', "Fours": ' ', "Fives": ' ',
+                     "Sixes": ' ', "Three of a kind": ' ', "Four of a kind": ' ', "Full House": ' ',
+                     "Small straight": ' ', "Large straight": ' ', "Chance": ' ', "Yahtzee": 0,
+                     "Yahtzee count": 0}]
+    return score_sheets
+
+
+def yahtzee_play() -> N one:
     """Play one yahtzee game.
 
     A function that runs play_turn alternatively with two players' score sheets.
     Play 13 fixed rounds. players with yahtzee play additional turns as many as their yahtzee count(s)
 
-    :param player_name: First player's name.
-    :param other_player_name: Second player's name.
-    :precondition: Two input parameters should be two players' names. Player with player_name plays first.
+    :precondition: N/A
     :postcondition : N/A
     :return: N/A
 
     #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
-    pass
+    score_sheets = get_empty_score_sheets()
 
 
 def yahtzee() -> None:
