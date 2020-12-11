@@ -560,6 +560,23 @@ def is_list_inclusive(including_list: list, included_list: list) -> bool:
     """
 
 
+def get_difference_list(list_one: list, list_two: list) -> list:
+    """Get difference of two lists
+
+    A function that returns the difference of the two lists(list_one - list_two)
+
+    :param list_one: A bigger, including list
+    :param list_two: A smaller, included list
+    :precondition: list_one should include list_two. i.e. All of the elements in list_two are in list_one.
+    :postcondition: Correctly return the difference list.
+    :return: The difference list of the two input lists.(list_one - list_two)
+    """
+    result = copy.deepcopy(list_one)
+    for element in list_two:
+        result.remove(element)
+    return result
+
+
 def change_dice_to_keep(given_dice: list) -> list:
     """Keep dice and from given dice.
 
@@ -572,6 +589,36 @@ def change_dice_to_keep(given_dice: list) -> list:
 
     #Can not doctest this function because it will require user's input.
     """
+
+
+def get_difference_list(list_one: list, list_two: list) -> list:
+    """Get difference of two lists
+
+    A function that returns the difference of the two lists(list_one - list_two)
+
+    :param list_one: A bigger, including list
+    :param list_two: A smaller, included list
+    :precondition: list_one should include list_two. i.e. All of the elements in list_two are in list_one.
+    :postcondition: Correctly return the difference list.
+    :return: The difference list of the two input lists.(list_one - list_two)
+
+    >>> print(get_difference_list(['1','2','3','4','5'] - ['1','2','3']))
+    ['4','5']
+
+    >>> print(get_difference_list(['1','2','3','4','5'] - ['1','2','3','4','5']))
+    []
+
+    >>> print(get_difference_list(['1','2','3','4','5'] - []))
+    ['1','2','3','4','5']
+
+    >>> print(get_difference_list(['1','1','1','3','3'] - ['1','3']))
+    ['1','1','3']
+
+    """
+    result = copy.deepcopy(list_one)
+    for element in list_two:
+        result.remove(element)
+    return result
 
 
 def throw_dice(dice_dict: dict) -> None:
