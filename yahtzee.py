@@ -626,6 +626,50 @@ def play_turn(score_sheet: dict) -> None:
     """
 
 
+def play_additional_turns(score_sheets: dict) -> None:
+    """Play additional turn.
+
+    A function that lets players have additional turns for as many yahtzees they got from previous turns.
+    If the two players both have yahtzees, they play turns alternatively for the smaller yahtzee counts between the two.
+    Then, the player with higher yahtzee counts plays alone for the difference between the two yahtzee counts.
+    If only one player had yahtzee(s), then the player plays turn(s) oneself.
+
+    :param score_sheets: Score sheets that contain results from previous turns.
+    :precondition: score_sheets should contain only two elements of dictionary.
+                   Each dictionary should contain result about player's previous 13 turns.
+                   The format of the dictionary should be as following :
+                   {"name": str, "Ones": score, "Twos": score, "Threes": score, "Fours": score,
+                   "Fives": score, "Sixes": score, "Three of a kind": score, "Four of a kind": score,
+                   "Full House": score, "Small straight": score, "Large straight": score, "Chance": score,
+                   "Yahtzee": score, "Yahtzee count": count}
+                   The values named 'score' and 'count' should be int.
+    :postcondition: N/A
+    :return: N/A
+
+    #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
+    """
+    player_one_left_turn = score_sheets[0]["Yahtzee count"]
+    player_two_left_turn = score_sheets[1]["Yahtzee count"]
+    # In case where player one has Yahtzee counts higher than or equal to player two
+    if player_one_left_turn >= player_two_left_turn:
+        # Play turns alternatively for less yahtzee counts between the two
+        for _ in range(player_two_left_turn):
+            for score_sheet in score_sheets:
+                play_turn(score_sheet)
+        # Player one plays turns by oneself for the rest of yahtzee counts one has
+        for _ in range(player_one_left_turn - player_two_left_turn):
+            play_turn(score_sheets[0])
+    # In case where player two has yahtzee counts higher than player two
+    else:
+        # Play turns alternatively for less yahtzee counts between the two
+        for _ in range(player_two_left_turn):
+            for score_sheet in score_sheets:
+                play_turn(score_sheet)
+        # Player two plays turns by oneself for the rest of yahtzee counts one has
+        for _ in range(player_two_left_turn - player_one_left_turn):
+            play_turn(score_sheets[1])
+
+
 def get_empty_score_sheets() -> list:
     """Return empty score sheets for yahtzee.
 
@@ -645,7 +689,7 @@ def get_empty_score_sheets() -> list:
     return score_sheets
 
 
-def yahtzee_play() -> N one:
+def yahtzee_play() -> None:
     """Play one yahtzee game.
 
     A function that runs play_turn alternatively with two players' score sheets.
@@ -658,6 +702,11 @@ def yahtzee_play() -> N one:
     #Can not unittest or doctest this function because it will be an integrated function which uses multiple functions.
     """
     score_sheets = get_empty_score_sheets()
+
+    for _ in range(13):
+        for score_sheet in score_sheets:
+            play_turn(score_sheet)
+    play_additional_turns(score_sheets)
 
 
 def yahtzee() -> None:
