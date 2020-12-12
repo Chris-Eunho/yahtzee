@@ -22,9 +22,9 @@ class TestPrintScore(TestCase):
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_print_score_two(self, mock_print):
-        expected = "<player_name's Score Sheet>\n\
-                    [1]Ones: 1	[2]Twos: 4	[3]Threes: 9	[4]Fours: 12	[5]Fives: 10	[6]Sixes: 6\n\
-                    [7]Three of a kind: 10	[8]Four of a kind: 23	[9]Full House: 25	[10]Small straight: 30\n\
+        expected = "<player_name's Score Sheet> \
+                    [1]Ones: 1	[2]Twos: 4	[3]Threes: 9	[4]Fours: 12	[5]Fives: 10	[6]Sixes: 6 \
+                    [7]Three of a kind: 10	[8]Four of a kind: 23	[9]Full House: 25	[10]Small straight: 30 \
                     [11]Large straight: 40	[12]Chance: 13	[13]Yahtzee: 50	**Yahtzee count: 0"
 
         sample = {"name": "player_name", "Ones": 1, "Twos": 4, "Threes": 9, "Fours": 12, "Fives": 10, "Sixes": 6,
