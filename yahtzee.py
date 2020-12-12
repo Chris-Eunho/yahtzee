@@ -424,8 +424,9 @@ def ask_combo_to_write(dice_list: list, score_sheet: dict) -> str:
         chosen_combo = number_combo_converter(user_answer)
         # When player chose to write yahtzee
         if chosen_combo == "Yahtzee":
-            if score_sheet[chosen_combo] == " " or score_sheet[chosen_combo] != 0 & len(set(dice_list)) == 1:
-                break
+            # Accept in
+            if score_sheet[chosen_combo] == " " or score_sheet[chosen_combo] != 0 and len(set(dice_list)) == 1:
+                return chosen_combo
             elif score_sheet[chosen_combo] == 0:
                 print("You can't write Yahtzee anymore after writing it as 0. Choose other combination")
                 continue
@@ -436,8 +437,7 @@ def ask_combo_to_write(dice_list: list, score_sheet: dict) -> str:
         if score_sheet[chosen_combo] != " ":
             print(f"You already wrote {chosen_combo}. Choose another combination.")
             continue
-        break
-    return chosen_combo
+        return chosen_combo
 
 
 def write_yahtzee(dice_list: list, score_sheet: dict) -> None:
