@@ -449,13 +449,13 @@ def write_yahtzee(dice_list: list, score_sheet: dict) -> None:
     :param dice_list: A numbers of player's current dice to write yahtzee with.
     :param score_sheet: The score sheet that player wants to write on . It contains player's score information.
     :precondition : dice_list should contains five elements, each of which is a die number in string.
-                    score_sheet should have a key "Yahtzee" and the value of which can not be 0.
+                    score_sheet should have a key "Yahtzee" and the value of which should be positive integer
                     score_sheet should have a key "Yahtzee count" and the value of which should be integer.
     :return: N/A
 
     """
     if len(set(dice_list)) == 1:
-        if score_sheet["Yahtzee count"] == " ":
+        if score_sheet["Yahtzee"] == " ":
             score_sheet["Yahtzee"] = 50
         else:
             score_sheet["Yahtzee"] += 100
