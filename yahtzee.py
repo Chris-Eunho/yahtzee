@@ -386,6 +386,22 @@ def print_score(score_sheet: dict) -> None:
 
 
 def number_combo_converter(number: str) -> str:
+    """Convert a number to a corresponding combination.
+
+    :param number: A number to convert to a combination.
+    :precondition: number should be an integer from 1 to 13 in string format
+    :postcondition: Correctly convert the input to corresponding combination.
+    :return: A converted combination.
+
+    >>> print(number_combo_converter("1"))
+    "Ones"
+
+    >>> print(number_combo_converter("5"))
+    "Fives"
+
+    >>> print(number_combo_converter("13"))
+    "Yahtzee"
+    """
     number_combo_match = {"1": "Ones", "2": "Twos", "3": "Threes", "4": "Fours", "5": "Fives", "6": "Sixes",
                           "7": "Three of a kind", "8": "Four of a kind", "9": "Full House", "10": "Small straight",
                           "11": "Large straight", "12": "Chance", "13": "Yahtzee"}
